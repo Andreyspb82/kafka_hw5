@@ -175,4 +175,33 @@ ___
 ### 5.1) Создаем топик `users`.
 ![total](screenshots/101.png)
 ___
-
+### 5.2) Список пользователей топика `users`:
+![total](screenshots/102.png)
+___
+### 5.3) Создание схемы данных значений для топика `users`.
+#### Необходимо выполнить команду:
+```
+curl \
+      --request POST \
+      --url 'https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net:443/subjects/users-value/versions' \
+      --user producer:password \
+      --header 'Content-Type: application/vnd.schemaregistry.v1+json' \
+      --data '{"schemaType": "JSON", "schema": "{\"$schema\": \"http://json-schema.org/draft-07/schema#\", \"title\": \"User\", \"type\": \"object\", \"properties\": { \"name\": { \"type\": \"string\" }, \"favoriteNumber\": { \"type\": \"integer\" }, \"favoriteColor\": { \"type\": \"string\" } }, \"required\": [\"name\", \"favoriteNumber\", \"favoriteColor\"]}" }' \
+      --insecure | jq
+```
+#### Результат выполнения команды:
+![total](screenshots/103.png)
+___
+### 5.4) Получение схем данных.
+#### Необходимо выполнить команду:
+```
+curl \
+    --request GET \
+    --url 'https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net/schemas' \
+    --user producer:password \
+    --header 'Accept: application/vnd.schemaregistry.v1+json' \
+    --insecure | jq
+```
+#### Результат выполнения команды:
+![total](screenshots/104.png)
+___
