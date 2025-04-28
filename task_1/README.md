@@ -76,7 +76,7 @@ curl \
 #### Результат выполнения команды:
 ![total](screenshots/010.png)
 ___
-### 2.3) Получение списка названия схем данных.
+### 2.4) Получение списка названия схем данных.
 #### Необходимо выполнить команду:
 ```
 curl \
@@ -89,3 +89,57 @@ curl \
 #### Результат выполнения команды:
 ![total](screenshots/011.png)
 ___
+### 2.5) Получение номера версии схемы данных.
+#### Необходимо выполнить команду:
+```
+curl -X GET https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net:443/subjects/messages-value/versions \
+    --user producer:password \
+    --insecure
+```
+#### Результат выполнения команды:
+![total](screenshots/012.png)
+___
+### 3) Отправление сообщений в топик `messages`.
+### 3.1) Отправляются сообщения из файла `message-list`.
+#### Необходимо выполнить команду в дирректории `schemes`, подставив соответствующие id схем данных:
+```
+jq \
+    -n --slurpfile data message-list.json \
+    '{
+      "key_schema_id": 1,
+      "value_schema_id": 2,
+      "records": $data.[]
+    }' \
+| curl \
+      --request POST \
+      --url 'https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net:443/topics/messages' \
+      --user producer:password \
+      --header 'Content-Type: application/vnd.kafka.avro.v2+json' \
+      --header 'Accept: application/vnd.kafka.v2+json' \
+      --data "@-" \
+      --insecure | jq
+```
+#### Результат выполнения команды:
+![total](screenshots/013.png)
+___
+### 4) Получение сообщений из топика `messages`.
+### 4.1) Создаем потребителя `my-consumer` в группе `my-group`.
+#### Необходимо выполнить команду:
+```
+curl \
+    --request POST \
+    --url 'https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net:443/consumers/my-group' \
+    --user producer:password \
+    --header 'Content-Type: application/vnd.kafka.v2+json' \
+    --header 'Accept: application/vnd.kafka.v2+json' \
+    --data '{
+              "name": "my-consumer",
+              "format": "avro",
+              "auto.offset.reset": "earliest"
+            }' \
+    --insecure | jq
+```
+#### Результат выполнения команды:
+![total](screenshots/014.png)
+___
+
