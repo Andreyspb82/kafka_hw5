@@ -19,9 +19,12 @@ ___
 ### 1.5) Список пользователей:
 ![total](screenshots/006.png)
 ___
+### 1.6) Список хостов кластера:
+![total](screenshots/007.png)
+___
 ### 2) Создание схем данных.
 ### 2.1) Создание схемы данных ключаей.
-### Необходимо выполнить команду в дирректории `schemes`:
+#### Необходимо выполнить команду в дирректории `schemes`:
 ```
 jq \
     -n --slurpfile data schema-key.json \
@@ -37,3 +40,52 @@ jq \
       --data "@-" \
       --insecure | jq
 ```
+#### Результат выполнения команды:
+![total](screenshots/008.png)
+___
+### 2.2) Создание схемы данных значений.
+#### Необходимо выполнить команду в дирректории `schemes`:
+```
+jq \
+    -n --slurpfile data schema-value.json \
+    '{
+       "schemaType": "AVRO",
+       "schema": "\($data)"
+    }' \
+| curl \
+      --request POST \
+      --url 'https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net:443/subjects/messages-value/versions' \
+      --user producer:password \
+      --header 'Content-Type: application/vnd.schemaregistry.v1+json' \
+      --data "@-" \
+      --insecure | jq
+```
+#### Результат выполнения команды:
+![total](screenshots/009.png)
+___
+### 2.3) Получение идендификаторов схем данных (id схем).
+#### Необходимо выполнить команду:
+```
+curl \
+    --request GET \
+    --url 'https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net/schemas' \
+    --user producer:password \
+    --header 'Accept: application/vnd.schemaregistry.v1+json' \
+    --insecure | jq
+```
+#### Результат выполнения команды:
+![total](screenshots/010.png)
+___
+### 2.3) Получение списка названия схем данных.
+#### Необходимо выполнить команду:
+```
+curl \
+    --request GET \
+    --url 'https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net/subjects' \
+    --user producer:password \
+    --header 'Accept: application/vnd.schemaregistry.v1+json' \
+    --insecure | jq
+```
+#### Результат выполнения команды:
+![total](screenshots/011.png)
+___
