@@ -211,7 +211,7 @@ ___
 ```
 https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net:443/subjects/users-value/versions?normalize=false
 ```
-##### Но неможет подключиться к порту 443:
+##### Но не может подключиться к порту 443:
 ![total](screenshots/201.png)
 ___
 ##### Если пройти по этому поти через консоль, выполнив команду:
