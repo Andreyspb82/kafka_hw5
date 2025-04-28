@@ -1,0 +1,22 @@
+[
+  {
+    "key": {
+      "id": 1      
+    },
+    "value": {
+      "name": "Anna",
+      "favorite_number": 33,
+      "favorite_color": "Red"
+    }
+  },
+  {
+    "key": {
+      "id": 2   
+    },
+    "value": {
+      "name": "Ivan",
+      "favorite_number": 44,
+      "favorite_color": "Blue"
+    }
+  }
+]
