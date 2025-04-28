@@ -207,6 +207,22 @@ curl \
 ___
 ### 6) Дополнение.
 #### Мне не удалось подключиться java-продюссером и java-консьюмером к порту 443, из-за сертификатов. Поэтому выполнил отправку и получение сообщений через консоль. Я просил помощи в чате когорты, но все равно смог орагинизовать соедиение с портом 443 только через консоль.
-___
+##### Producer пытается получить номер версии схемы по пути:
+```
+https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net:443/subjects/users-value/versions?normalize=false
+```
+##### Но неможет подключиться к порту 443:
 ![total](screenshots/201.png)
+___
+##### Если пройти по этому поти через консоль, выполнив команду:
+```
+curl \
+    --request GET \
+    --url 'https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net:443/subjects/users-value/versions?normalize=false' \
+    --user producer:password \
+    --header 'Content-Type: application/vnd.schemaregistry.v1+json' \
+    --insecure | jq
+```
+##### То номер версии схемы возвращается:
+![total](screenshots/202.png)
 ___
