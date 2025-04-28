@@ -142,4 +142,31 @@ curl \
 #### Результат выполнения команды:
 ![total](screenshots/014.png)
 ___
-
+### 4.2) Подписываемся на топик `messages`.
+#### Необходимо выполнить команду:
+```
+curl \
+    --request POST \
+    --url 'https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net:443/consumers/my-group/instances/my-consumer/subscription' \
+    --user producer:password \
+    --header 'Content-Type: application/vnd.kafka.v2+json' \
+    --header 'Accept: application/vnd.kafka.v2+json' \
+    --data '{"topics": ["messages"]}' \
+    --insecure | jq
+```
+#### Результат выполнения команды:
+![total](screenshots/015.png)
+___
+### 4.3) Получение сообщений из топика `messages`.
+#### Необходимо выполнить команду:
+```
+curl \
+    --request GET \
+    --url 'https://rc1a-lflcmbh2adbn4q0q.mdb.yandexcloud.net:443/consumers/my-group/instances/my-consumer/records' \
+    --user producer:password \
+    --header 'Accept: application/vnd.kafka.avro.v2+json' \
+    --insecure | jq
+```
+#### Результат выполнения команды:
+![total](screenshots/016.png)
+___
