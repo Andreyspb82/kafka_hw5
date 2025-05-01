@@ -27,4 +27,10 @@ ___
 ![total](screenshots/007.png)
 ___
 ### 3) Проверка работы и интеграция  NiFi с кластером Kafka в облаке:
-
+### 3.1) Был прочитан и передан в топик `nifi-topic` файл : [input.csv](infra/nifi_data/input.csv)
+### 3.2) Консьюмером были получены сообщения из топика `nifi-topic`:
+![total](screenshots/008.png)
+___
+### 3.3) Логи работы NiFi:
+![total](screenshots/009.png)
+___
