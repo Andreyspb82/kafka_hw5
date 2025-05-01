@@ -16,3 +16,8 @@ docker compose up -d
 ___
 ![total](screenshots/003.png)
 ___
+### 2.3) С помощью NiFi UI был создан и настроен Processor `PublishKafkaRecord_2_0`:
+![total](screenshots/004.png)
+___
+![total](screenshots/005.png)
+___
